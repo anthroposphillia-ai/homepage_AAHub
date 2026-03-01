@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const stories = [
     {
@@ -42,36 +43,29 @@ export default function StorySection() {
                             className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-12`}
                         >
                             {/* 이미지 영역 */}
-                            <div className="w-full md:w-1/2 relative">
-                                <div className="aspect-[4/3] overflow-hidden rounded-2xl grayscale hover:grayscale-0 transition-all duration-700">
-                                    <img
-                                        src={story.image}
-                                        alt={story.label}
-                                        className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-1000"
-                                    />
-                                </div>
-                                <div className="absolute -bottom-4 -right-4 bg-primary px-4 py-2 text-sm font-bold skew-x-[-12deg]">
-                                    {story.label}
-                                </div>
-                            </div>
+                            <div className="max-w-4xl mx-auto space-y-12">
+                                <motion.h2
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    className="text-4xl md:text-6xl font-bold leading-tight tracking-tight"
+                                    dangerouslySetInnerHTML={{ __html: t('story.title') }}
+                                />
 
-                            {/* 텍스트 영역 */}
-                            <div className="w-full md:w-1/2 flex flex-col justify-center">
-                                <span className="text-primary font-bold tracking-widest uppercase mb-4 opacity-80">
-                                    {story.stage}
-                                </span>
-                                <p className="text-2xl md:text-4xl leading-snug font-light text-white/90">
-                                    "{story.text}"
-                                </p>
-                                <div className="mt-8 flex items-center space-x-2 text-white/40">
-                                    <div className="w-8 h-[1px] bg-white/40" />
-                                    <span className="text-sm">어느 보호소의 이름 없는 동물로부터</span>
-                                </div>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.2 }}
+                                    className="space-y-8"
+                                >
+                                    <p className="text-xl md:text-2xl text-white/60 leading-relaxed font-light">
+                                        {t('story.content')}
+                                    </p>
+                                </motion.div>
                             </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
+                        </div>
         </section>
-    );
+                );
 }
+                ```

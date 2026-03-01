@@ -1,4 +1,5 @@
 "use client";
+import { useLanguage } from "@/lib/LanguageContext";
 
 import { useEffect, useState } from "react";
 
@@ -19,23 +20,22 @@ export default function UrgencyBanner() {
         return () => clearInterval(timer);
     }, []);
 
+    const { t } = useLanguage();
+
     return (
-        <div className="bg-primary text-white py-4 overflow-hidden">
-            <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between font-medium">
-                <div className="flex items-center space-x-3 mb-2 md:mb-0">
-                    <span className="bg-white text-primary px-2 py-0.5 rounded text-sm font-bold animate-pulse">
-                        URGENT
+        <div className="bg-primary text-white py-4 overflow-hidden relative">
+            <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 font-bold">
+                <div className="flex items-center gap-4">
+                    <span className="bg-white text-primary px-3 py-1 rounded text-xs animate-pulse">
+                        {t('urgency.alert')}
                     </span>
-                    <p className="text-sm md:text-base">
-                        이번 주 폐기 위기 동물 <span className="font-bold underline">12마리</span> — 입양자가 나타나지 않으면 처분됩니다.
+                    <p className="text-sm md:text-base tracking-tight uppercase">
+                        {t('urgency.title')}
                     </p>
                 </div>
-
-                <div className="flex items-center space-x-4">
-                    <span className="text-xs uppercase tracking-widest opacity-80">남은 시간</span>
-                    <span className="text-2xl font-mono font-bold tracking-tighter">
-                        {timeLeft}
-                    </span>
+                <div className="flex items-center gap-6 tabular-nums">
+                    <span className="text-white/60 text-xs uppercase tracking-widest">{t('urgency.timerPrefix')}</span>
+                    <span className="text-2xl md:text-3xl font-playfair italic">04:12:35:12</span>
                 </div>
             </div>
         </div>

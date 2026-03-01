@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const { language, setLanguage, t } = useLanguage();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -21,16 +23,28 @@ export default function Navbar() {
                     AA<span className="text-primary">Hub</span>
                 </Link>
 
-                <div className="hidden md:flex items-center space-x-8">
-                    <Link href="/adopt" className="hover:text-primary transition-colors text-sm">입양하기</Link>
-                    <Link href="/shelter" className="hover:text-primary transition-colors text-sm">쉘터 찾기</Link>
-                    <Link href="/channel" className="hover:text-primary transition-colors text-sm">영상 채널</Link>
-                    <Link href="/donate" className="bg-primary hover:bg-primary-dark px-6 py-2.5 rounded-full text-sm font-semibold transition-all">
-                        후원하기
-                    </Link>
+                <div className="hidden md:flex items-center gap-10">
+                    <Link href="/adopt" className="text-sm font-medium hover:text-primary transition-colors">{t('nav.adopt')}</Link>
+                    <Link href="/shelter" className="text-sm font-medium hover:text-primary transition-colors">{t('nav.shelters')}</Link>
+                    <Link href="/report" className="text-sm font-medium hover:text-primary transition-colors">{t('nav.report')}</Link>
                 </div>
 
-                {/* 모바일 햄버거 메뉴 생략 (MVP) */}
+                <div className="flex items-center gap-6">
+                    <div className="flex gap-2 bg-white/5 p-1 rounded-lg border border-white/10 text-[10px] font-bold">
+                        {(['ko', 'en', 'jp'] as const).map((lang) => (
+                            <button
+                                key={lang}
+                                onClick={() => setLanguage(lang)}
+                                className={`px-2 py-1 rounded transition-colors ${language === lang ? 'bg-primary text-white' : 'text-white/40 hover:text-white'}`}
+                            >
+                                {lang.toUpperCase()}
+                            </button>
+                        ))}
+                    </div>
+                    <Link href="/donate" className="bg-primary hover:bg-primary-dark px-6 py-2.5 rounded-full text-sm font-semibold transition-all">
+                        {t('nav.donate')}
+                    </Link>
+                </div>
             </div>
         </nav>
     );
