@@ -31,7 +31,7 @@ export default function HeroSection() {
                     className="max-w-3xl"
                 >
                     <h1
-                        className="text-6xl md:text-8xl font-bold font-playfair leading-tight mb-8 tracking-tighter"
+                        className="text-6xl md:text-8xl font-bold font-serif leading-tight mb-8 tracking-tighter"
                         dangerouslySetInnerHTML={{ __html: t('hero.title') }}
                     />
                     <p className="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed font-light">
