@@ -26,7 +26,7 @@ export default function WorldShelters() {
             const { data, error } = await supabase.from('shelters').select('country_code');
             if (!error && data) {
                 const map: Record<string, number> = {};
-                data.forEach((s) => {
+                data.forEach((s: { country_code?: string }) => {
                     if (s.country_code) {
                         map[s.country_code] = (map[s.country_code] || 0) + 1;
                     }
@@ -37,7 +37,7 @@ export default function WorldShelters() {
         fetchCounts();
     }, []);
 
-    const getLocalized = (item: any, key: string) => {
+    const getLocalized = (item: Record<string, string>, key: string) => {
         if (language === 'ko') return item[`${key}_ko`] || item[key];
         if (language === 'jp') return item[`${key}_jp`] || item[key];
         return item[`${key}_en`] || item[key];

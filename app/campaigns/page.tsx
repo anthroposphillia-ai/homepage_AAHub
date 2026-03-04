@@ -48,8 +48,9 @@ const campaigns = [
 export default function CampaignsPage() {
     const { language } = useLanguage();
 
-    const getLocalized = (item: any, key: string) => {
-        if (language === 'ko') return item[key] || item[`${key}_en`];
+    // 지역화(i18n) 텍스트 반환 헬퍼
+    const getLocalized = (item: Record<string, any>, key: string) => {
+        if (language === 'ko') return item[`${key}_ko`] || item[key];
         if (language === 'jp') return item[`${key}_jp`] || item[key];
         return item[`${key}_en`] || item[key];
     };

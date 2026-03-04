@@ -18,11 +18,11 @@ const countries = [
 export default function ShelterIndexPage() {
     const { language } = useLanguage();
 
-    // Helper to get localized text
-    const getLocalized = (item: any, key: string) => {
+    // 지역화(i18n) 텍스트 반환 헬퍼 (없으면 기본값)
+    const getLocalized = (item: Record<string, any>, key: string) => {
         if (language === 'ko') return item[`${key}_ko`] || item[key];
         if (language === 'jp') return item[`${key}_jp`] || item[key];
-        return item[`${key}_en`] || item[key]; // fallback to English/default
+        return item[`${key}_en`] || item[key];
     };
 
     return (
